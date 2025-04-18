@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Street Navigator NYC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    .button {
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .google {
+      background-color: #4285F4;
+    }
+    .apple {
+      background-color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Street Navigator NYC</h1>
+
+  <input type="text" id="street" placeholder="Enter Street Name">
+  <input type="text" id="avenue" placeholder="Enter Avenue Name">
+
+  <select id="borough">
+    <option value="Manhattan">Manhattan</option>
+    <option value="Brooklyn">Brooklyn</option>
+    <option value="Queens">Queens</option>
+    <option value="Bronx">Bronx</option>
+    <option value="Staten Island">Staten Island</option>
+  </select>
+
+  <button class="button google" onclick="openGoogleMaps()">Open in Google Maps</button>
+  <button class="button apple" onclick="openAppleMaps()">Open in Apple Maps</button>
+
+  <script>
+    function getFullAddress() {
+      const street = document.getElementById("street").value.trim();
+      const avenue = document.getElementById("avenue").value.trim();
+      const borough = document.getElementById("borough").value;
+      return `${street} & ${avenue}, ${borough}, New York`;
+    }
+
+    function openGoogleMaps() {
+      const address = encodeURIComponent(getFullAddress());
+      const url = `https://www.google.com/maps/search/?api=1&query=${address}`;
+      window.open(url, '_blank');
+    }
+
+    function openAppleMaps() {
+      const address = encodeURIComponent(getFullAddress());
+      const url = `http://maps.apple.com/?q=${address}`;
+      window.open(url, '_blank');
+    }
+  </script>
+
+</body>
+</html>
